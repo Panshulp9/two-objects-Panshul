@@ -65,8 +65,12 @@ public class BasicGameApp implements Runnable {
       //variable and objects
       //create (construct) the objects needed for the game and load up 
 		astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png"); //load the picture
-		astro = new Astronaut(10,100);
-
+		astro = new Astronaut(200,100);
+        astro2 = new Astronaut (500,500);
+        astro2.dx = -3;
+        astro2.dy=5;
+        astro2.height = 99;
+        astro2.width = 77;
 
 	}// BasicGameApp()
 
@@ -94,6 +98,7 @@ public class BasicGameApp implements Runnable {
 	{
       //calls the move( ) code in the objects
 		astro.move();
+        astro2.move();
 
 	}
 	
@@ -145,7 +150,7 @@ public class BasicGameApp implements Runnable {
 
       //draw the image of the astronaut
 		g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
-
+        g.drawImage(astroPic, astro2.xpos, astro2.ypos, astro2.width, astro2.height, null);
 		g.dispose();
 
 		bufferStrategy.show();
