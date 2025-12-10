@@ -39,11 +39,14 @@ public class BasicGameApp implements Runnable {
    
 	public BufferStrategy bufferStrategy;
 	public Image astroPic;
+    public Image asteroidPic;
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Astronaut astro;
     public Astronaut astro2;
+    public Asteroid asteroid1;
+
 
 
    // Main method definition
@@ -59,18 +62,21 @@ public class BasicGameApp implements Runnable {
    // This section is the setup portion of the program
    // Initialize your variables and construct your program objects here.
 	public BasicGameApp() {
-      
+        int randx = (int)(Math.random()*1000)+1;
+        int randy = (int)(Math.random()*700)+1;
       setUpGraphics();
        
       //variable and objects
       //create (construct) the objects needed for the game and load up 
 		astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png"); //load the picture
-		astro = new Astronaut(200,100);
-        astro2 = new Astronaut (500,500);
+        asteroidPic = Toolkit.getDefaultToolkit().getImage("ASTEROID ASTRO.jpeg");
+		astro = new Astronaut(randx,randy);
+        astro2 = new Astronaut (randx,randy);
         astro2.dx = -3;
         astro2.dy=5;
         astro2.height = 99;
         astro2.width = 77;
+        asteroid1 = new Asteroid (467,randy);
 
 	}// BasicGameApp()
 
@@ -99,7 +105,7 @@ public class BasicGameApp implements Runnable {
       //calls the move( ) code in the objects
 		astro.move();
         astro2.move();
-
+        asteroid1.move();
 	}
 	
    //Pauses or sleeps the computer for the amount specified in milliseconds
@@ -151,7 +157,9 @@ public class BasicGameApp implements Runnable {
       //draw the image of the astronaut
 		g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
         g.drawImage(astroPic, astro2.xpos, astro2.ypos, astro2.width, astro2.height, null);
-		g.dispose();
+        g.drawImage(asteroidPic, asteroid1.xpos, asteroid1.ypos, asteroid1.width, asteroid1.height, null);
+        g.dispose();
+
 
 		bufferStrategy.show();
 	}
