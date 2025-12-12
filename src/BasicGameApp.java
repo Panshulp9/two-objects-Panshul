@@ -78,7 +78,7 @@ public class BasicGameApp implements Runnable {
         astro2.height = 99;
         astro2.width = 77;
         asteroid1 = new Asteroid (467,randy);
-        asteroid2 = new Asteroid(randx,499);
+        asteroid2 = new Asteroid(randx,497);
 
 	}// BasicGameApp()
 
