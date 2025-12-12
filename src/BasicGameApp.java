@@ -46,6 +46,7 @@ public class BasicGameApp implements Runnable {
 	private Astronaut astro;
     public Astronaut astro2;
     public Asteroid asteroid1;
+    public Asteroid asteroid2;
 
 
 
@@ -77,6 +78,7 @@ public class BasicGameApp implements Runnable {
         astro2.height = 99;
         astro2.width = 77;
         asteroid1 = new Asteroid (467,randy);
+        asteroid2 = new Asteroid(randx,499);
 
 	}// BasicGameApp()
 
@@ -106,6 +108,7 @@ public class BasicGameApp implements Runnable {
 		astro.move();
         astro2.move();
         asteroid1.move();
+        asteroid2.move();
 	}
 	
    //Pauses or sleeps the computer for the amount specified in milliseconds
@@ -158,6 +161,7 @@ public class BasicGameApp implements Runnable {
 		g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
         g.drawImage(astroPic, astro2.xpos, astro2.ypos, astro2.width, astro2.height, null);
         g.drawImage(asteroidPic, asteroid1.xpos, asteroid1.ypos, asteroid1.width, asteroid1.height, null);
+        g.drawImage(asteroidPic, asteroid2.xpos, asteroid2.ypos, asteroid2.width, asteroid2.height, null);
         g.dispose();
 
 
