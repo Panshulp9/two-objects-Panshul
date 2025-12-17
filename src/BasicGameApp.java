@@ -121,6 +121,10 @@ public class BasicGameApp implements Runnable {
             astro2.dy=-astro.dy;
             astro2.isAlive = false;
         }
+        if(asteroid2.hitbox.intersects(asteroid1.hitbox)){
+            System.out.println("KABOOM!");
+            asteroid2.dx=-asteroid2.dx;
+        }
 
     }
 	
@@ -175,9 +179,12 @@ public class BasicGameApp implements Runnable {
         if (astro2.isAlive == true){
          g.drawImage(astroPic, astro2.xpos, astro2.ypos, astro2.width, astro2.height, null);
         }
-        g.drawImage(asteroidPic, asteroid1.xpos, asteroid1.ypos, asteroid1.width, asteroid1.height, null);
+        if(asteroid1.isAlive == true){
+            g.drawImage(asteroidPic, asteroid1.xpos, asteroid1.ypos, asteroid1.width, asteroid1.height, null);
+        }
         g.drawImage(asteroidPic, asteroid2.xpos, asteroid2.ypos, asteroid2.width, asteroid2.height, null);
         g.drawRect(astro.hitbox.x,astro.hitbox.y, astro.hitbox.width,astro.hitbox.height);
+        g.drawRect(asteroid2.hitbox.x,asteroid2.hitbox.y, asteroid2.hitbox.width,asteroid2.hitbox.height);
         g.dispose();
 
 
