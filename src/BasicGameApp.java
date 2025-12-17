@@ -40,6 +40,7 @@ public class BasicGameApp implements Runnable {
 	public BufferStrategy bufferStrategy;
 	public Image astroPic;
     public Image asteroidPic;
+    public Image backgroundPic;
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
@@ -69,7 +70,8 @@ public class BasicGameApp implements Runnable {
        
       //variable and objects
       //create (construct) the objects needed for the game and load up 
-		astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png"); //load the picture
+		backgroundPic = Toolkit.getDefaultToolkit().getImage("Space.jpeg");
+        astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png"); //load the picture
         asteroidPic = Toolkit.getDefaultToolkit().getImage("ASTEROID ASTRO.jpeg");
 		astro = new Astronaut(randx,randy);
         astro2 = new Astronaut (randx,randy);
@@ -77,8 +79,9 @@ public class BasicGameApp implements Runnable {
         astro2.dy=5;
         astro2.height = 99;
         astro2.width = 77;
-        asteroid1 = new Asteroid (467,randy);
-        asteroid2 = new Asteroid(randx,497);
+        asteroid1 = new Asteroid (467,440);
+        asteroid2 = new Asteroid(477,507);
+        asteroid1.dx= -asteroid1.dx;
 
 	}// BasicGameApp()
 
@@ -121,9 +124,13 @@ public class BasicGameApp implements Runnable {
             astro2.dy=-astro.dy;
             astro2.isAlive = false;
         }
-        if(asteroid2.hitbox.intersects(asteroid1.hitbox)){
+        if(asteroid2.hitbox.intersects(asteroid1.hitbox) && asteroid2.isCrashing == false){
             System.out.println("KABOOM!");
-            asteroid2.dx=-asteroid2.dx;
+            asteroid2.height = asteroid2.height+10;
+            asteroid2.isCrashing = true;
+        }
+        if (!asteroid1.hitbox.intersects(asteroid2.hitbox)){
+            asteroid2.isCrashing = false;
         }
 
     }
@@ -172,7 +179,10 @@ public class BasicGameApp implements Runnable {
 	//paints things on the screen using bufferStrategy
 	private void render() {
 		Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
+
 		g.clearRect(0, 0, WIDTH, HEIGHT);
+
+        g.drawImage(backgroundPic,0,0,WIDTH,HEIGHT,null);
 
       //draw the image of the astronaut
         g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);

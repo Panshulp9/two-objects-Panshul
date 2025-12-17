@@ -10,6 +10,7 @@ public class Asteroid {
     public int height;
     public boolean isAlive;//a boolean to denote if the hero is alive or dead.
     public Rectangle hitbox;
+    public boolean isCrashing;
 
 
     // METHOD DEFINITION SECTION
@@ -29,6 +30,7 @@ public class Asteroid {
         height = 80;
         isAlive = true;
         hitbox = new Rectangle(xpos,ypos,width,height);
+        isCrashing = false;
 
     } // constructor
 
