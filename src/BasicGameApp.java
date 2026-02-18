@@ -13,6 +13,8 @@
 
 //Graphics Libraries
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.*;
 import javax.swing.JFrame;
@@ -21,8 +23,8 @@ import javax.swing.JPanel;
 
 //*******************************************************************************
 // Class Definition Section
-
-public class BasicGameApp implements Runnable {
+//step 1: implement key listener
+public class BasicGameApp implements Runnable, KeyListener {
 
    //Variable Definition Section
    //Declare the variables used in the program 
@@ -79,9 +81,10 @@ public class BasicGameApp implements Runnable {
         astro2.dy=5;
         astro2.height = 99;
         astro2.width = 77;
-        asteroid1 = new Asteroid (467,440);
+        asteroid1 = new Asteroid (427,640);
         asteroid2 = new Asteroid(477,507);
         asteroid1.dx= -asteroid1.dx;
+
 
 	}// BasicGameApp()
 
@@ -117,7 +120,7 @@ public class BasicGameApp implements Runnable {
     public void crashing(){
         //if astronauts crash into each other
         if(astro.hitbox.intersects(astro2.hitbox)){
-            System.out.println("crash");
+           //n System.out.println("crash");
             astro.dx=-astro.dx;
             astro2.dx=-astro2.dx;
             astro.dy=-astro.dy;
@@ -155,7 +158,11 @@ public class BasicGameApp implements Runnable {
    
       // creates a canvas which is a blank rectangular area of the screen onto which the application can draw
       // and trap input events (Mouse and Keyboard events)
-      canvas = new Canvas();  
+      canvas = new Canvas();
+
+      //add KeyListener to canvas
+       canvas.addKeyListener(this);
+
       canvas.setBounds(0, 0, WIDTH, HEIGHT);
       canvas.setIgnoreRepaint(true);
    
@@ -187,8 +194,8 @@ public class BasicGameApp implements Runnable {
       //draw the image of the astronaut
         g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
         if (astro2.isAlive == true){
-         g.drawImage(astroPic, astro2.xpos, astro2.ypos, astro2.width, astro2.height, null);
-        }
+        g.drawImage(astroPic, astro2.xpos, astro2.ypos, astro2.width, astro2.height, null);
+    }
         if(asteroid1.isAlive == true){
             g.drawImage(asteroidPic, asteroid1.xpos, asteroid1.ypos, asteroid1.width, asteroid1.height, null);
         }
@@ -200,4 +207,48 @@ public class BasicGameApp implements Runnable {
 
 		bufferStrategy.show();
 	}
+    //step 3: add methods
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        System.out.println(e.getKeyCode());
+        if (e.getKeyCode() == 38){
+            System.out.println("going up");
+            astro.ypos = astro.ypos-10;
+            //astro.dy = -Math.abs(astro.dy);
+            astro.isUp = true;
+        }
+        if (e.getKeyCode() == 37){
+            System.out.println("going left");
+            astro.xpos = astro.xpos-5;
+        }
+        if (e.getKeyCode() == 39){
+            System.out.println("going right");
+            astro.xpos = astro.xpos+5;
+        }
+        if(e.getKeyCode() == 40){
+            System.out.println("going down");
+            astro.ypos = astro.ypos+10;
+        }
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        System.out.println("I stopped touching "+ e.getKeyCode());
+        if(e.getKeyCode() == 38){
+            System.out.println("not going up");
+            astro.isUp = false;
+        }
+    }
+
+
+
+
+
 }
