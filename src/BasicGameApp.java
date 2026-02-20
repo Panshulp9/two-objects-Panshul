@@ -199,7 +199,8 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
         g.drawRect(100, 100, 100, 100);
         g.setColor(Color.MAGENTA);
         g.fillRect(100, 100, 100, 100);
-        g.drawString("START",100,100);
+        g.setColor(Color.blue);
+        g.drawString("START",133,150);
 
 
         if (startGame == true) {
