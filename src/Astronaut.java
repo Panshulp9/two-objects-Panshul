@@ -19,6 +19,7 @@ public class Astronaut {
     public boolean isUp;
     public boolean isleft;
     public boolean isright;
+    public boolean isdown;
 
 
     // METHOD DEFINITION SECTION
@@ -41,6 +42,7 @@ public class Astronaut {
         isUp = false;
         isleft = false;
         isright = false;
+        isdown = false;
  
     } // constructor
 
