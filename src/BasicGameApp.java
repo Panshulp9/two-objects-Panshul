@@ -52,6 +52,9 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
     public Asteroid asteroid2;
     public Rectangle startHitbox;
     public boolean startGame;
+    public boolean mousePressed;
+    public int randxp = (int)(Math.random()*1000);
+    public int randxy = (int)(Math.random()*700);
 
 
 
@@ -87,7 +90,9 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
         asteroid2 = new Asteroid(477,507);
         asteroid1.dx= -asteroid1.dx;
         startHitbox = new Rectangle(100,100,100,100);
+        mousePressed = false;
         startGame = false;
+
 
 
 	}// BasicGameApp()
@@ -216,6 +221,9 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
             g.drawImage(asteroidPic, asteroid2.xpos, asteroid2.ypos, asteroid2.width, asteroid2.height, null);
             g.drawRect(astro.hitbox.x, astro.hitbox.y, astro.hitbox.width, astro.hitbox.height);
             g.drawRect(asteroid2.hitbox.x, asteroid2.hitbox.y, asteroid2.hitbox.width, asteroid2.hitbox.height);
+            if (mousePressed == true){
+                g.drawImage(asteroidPic,randxp, randxy, 90, 90, null);
+            }
         }
         g.dispose();
 
@@ -274,6 +282,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
+        mousePressed = true;
         System.out.println(e.getPoint());
         Rectangle pointHitbox = new Rectangle(e.getX(),e.getY(),1,1);
         if(startHitbox.intersects(pointHitbox)){
@@ -284,7 +293,6 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
     }
 
     @Override
