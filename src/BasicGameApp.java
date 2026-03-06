@@ -55,6 +55,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
     public boolean mousePressed;
     public int randxp = (int)(Math.random()*1000);
     public int randxy = (int)(Math.random()*700);
+    public Asteroid[] asteroids;
 
 
 
@@ -93,6 +94,11 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
         mousePressed = false;
         startGame = false;
 
+        asteroids = new Asteroid[5];
+        for (int h = 0; h < asteroids.length; h++){
+            asteroids[h] = new Asteroid((int)(Math.random()*900), (int)(Math.random()*600));
+        }
+
 
 
 	}// BasicGameApp()
@@ -126,6 +132,9 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
             asteroid1.move();
             asteroid2.move();
             crashing();
+            for (int k = 0; k < asteroids.length; k++){
+                asteroids[k].move();
+            }
         }
 	}
     public void crashing(){
@@ -221,9 +230,13 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
             g.drawImage(asteroidPic, asteroid2.xpos, asteroid2.ypos, asteroid2.width, asteroid2.height, null);
             g.drawRect(astro.hitbox.x, astro.hitbox.y, astro.hitbox.width, astro.hitbox.height);
             g.drawRect(asteroid2.hitbox.x, asteroid2.hitbox.y, asteroid2.hitbox.width, asteroid2.hitbox.height);
-            if (mousePressed == true){
+            if (startGame == true && mousePressed == true){
                 g.drawImage(asteroidPic,randxp, randxy, 90, 90, null);
             }
+            for (int s = 0; s < asteroids.length; s++){
+                g.drawImage(asteroidPic, asteroids[s].xpos, asteroids[s].ypos, asteroids[s].width, asteroids[s].height, null);
+            }
+
         }
         g.dispose();
 
