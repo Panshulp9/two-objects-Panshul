@@ -97,6 +97,8 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
         asteroids = new Asteroid[5];
         for (int h = 0; h < asteroids.length; h++){
             asteroids[h] = new Asteroid((int)(Math.random()*900), (int)(Math.random()*600));
+            asteroids[h].dx = (int)(Math.random()*10)-10;
+            asteroids[h].dy = (int)(Math.random()*10)-10;
         }
 
 
